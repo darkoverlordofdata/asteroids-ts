@@ -1,0 +1,86 @@
+animation_system
+	AnimationNode
+	    animation : asteroids.components.Animation
+
+
+audio_system
+	AudioNode
+	    audio : asteroids.components.Audio
+
+bullet_age_system
+	BulletAgeNode
+	    bullet : asteroids.components.Bullet
+
+death_throes_system
+	DeathThroesNode
+	    death : asteroids.components.DeathThroes
+
+gun_control_system
+	GunControlNode
+	    audio     : asteroids.components.Audio
+	    control   : asteroids.components.GunControls
+	    gun       : asteroids.components.Gun
+	    position  : asteroids.components.Position
+
+hud_system
+	HudNode
+	    state : asteroids.components.GameState
+	    hud   : asteroids.components.Hud
+
+motion_control_system
+	MotionControlNode
+	    control   : asteroids.components.MotionControls
+	    position  : asteroids.components.Position
+	    motion    : asteroids.components.Motion
+
+movement_system
+	MovementNode
+	    position : asteroids.components.Position
+	    motion : asteroids.components.Motion
+
+render_system
+	RenderNode
+	    position  : asteroids.components.Position
+	    display   : asteroids.components.Display
+
+
+collision_system
+	SpaceshipCollisionNode
+	    spaceship : asteroids.components.Spaceship
+	    position  : asteroids.components.Position
+	AsteroidCollisionNode
+	    asteroid  : asteroids.components.Asteroid
+	    position  : asteroids.components.Position
+	    collision : asteroids.components.Collision
+	    audio     : asteroids.components.Audio
+	BulletCollisionNode
+	    bullet    : asteroids.components.Bullet
+	    position  : asteroids.components.Position
+	    collision : asteroids.components.Collision
+	GameNode
+	    state : asteroids.components.GameState
+
+game_manager
+	GameNode
+	    state : asteroids.components.GameState
+	SpaceshipNode
+	    spaceship : asteroids.components.Spaceship
+	    position  : asteroids.components.Position
+	AsteroidCollisionNode
+	    asteroid  : asteroids.components.Asteroid
+	    position  : asteroids.components.Position
+	    collision : asteroids.components.Collision
+	    audio     : asteroids.components.Audio
+	BulletCollisionNode
+	    bullet    : asteroids.components.Bullet
+	    position  : asteroids.components.Position
+	    collision : asteroids.components.Collision
+
+wait_for_start_system
+	WaitForStartNode
+	    wait : asteroids.components.WaitForStart
+	AsteroidCollisionNode
+	    asteroid  : asteroids.components.Asteroid
+	    position  : asteroids.components.Position
+	    collision : asteroids.components.Collision
+	    audio     : asteroids.components.Audio

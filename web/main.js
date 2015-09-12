@@ -1,0 +1,1 @@
+new asteroids.Main();
