@@ -1,6 +1,9 @@
 module asteroids.components {
 	
 	import Component = artemis.Component;
+  export interface IAnimation {
+    animate(time);
+  }
 
 	export class Animation extends Component {
 
@@ -11,12 +14,12 @@ module asteroids.components {
      * initialize the component
      * @param animation
      */
-		public initialize(animation:Object=null) {
+		public initialize(animation:IAnimation) {
       this.animation = animation;
     }
 
     /** @type {Object} */
-     public animation:Object;
+     public animation:IAnimation;
 	}
 
   Animation.prototype.animation = null;

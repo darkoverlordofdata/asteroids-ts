@@ -43,5 +43,6 @@ module asteroids.templates {
 
       return entity;
     }
+
   }
 }

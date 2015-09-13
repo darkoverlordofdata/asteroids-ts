@@ -1,8 +1,9 @@
 module asteroids.graphics {
 
   import Point = asteroids.ui.Point;
+  import IAnimation = asteroids.components.IAnimation;
 
-  export class AsteroidDeathView {
+  export class AsteroidDeathView implements IAnimation {
 
     /** @const*/
     static numDots:number = 8;

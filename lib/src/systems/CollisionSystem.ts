@@ -37,13 +37,14 @@ module asteroids.systems {
 
 
   export class CollisionSystem extends EntitySystem {
+    @Mapper(GameState) gm:ComponentMapper<GameState>;
     @Mapper(Position) pm:ComponentMapper<Position>;
     @Mapper(Collision) cm:ComponentMapper<Collision>;
 
     private collisionPairs:Bag<CollisionPair>;
 
     constructor() {
-      super(Aspect.getAspectForAll(Position, Collision));
+      super(Aspect.getAspectForAll(GameState));
     }
 
 
@@ -51,13 +52,14 @@ module asteroids.systems {
 
       this.collisionPairs = new Bag<CollisionPair>();
 
-      /**
-       * Bullets collide with Asteroids
-       */
-      this.collisionPairs.add(new CollisionPair(this, Constants.Groups.BULLETS, Constants.Groups.ASTEROIDS,
-        {
-
-          handleCollision: (bullet:Entity, asteroid:Entity) => {
+      this.collisionPairs.add(new CollisionPair(this, Constants.Groups.BULLETS, Constants.Groups.ASTEROIDS, {
+          /**
+           * Bullets collide with Asteroids
+           * @param game
+           * @param bullet
+           * @param asteroid
+           */
+          handleCollision: (game:entity, bullet:Entity, asteroid:Entity) => {
             var c1:Collision = this.cm.get(asteroid);
             var p1:Point = this.pm.get(asteroid).position;
             if (c1.radius > 10) {
@@ -71,25 +73,34 @@ module asteroids.systems {
             }
             bullet.deleteFromWorld();
             asteroid.deleteFromWorld();
+            this.gm.get(game).hits++;
+
+            this.world.createEntityFromTemplate('asteroid_death', c1.radius, p1.x, p1.y).addToWorld();
           }
         }));
 
-      /**
-       * Asteroids collide with Spaceships
-       */
-      this.collisionPairs.add(new CollisionPair(this, Constants.Groups.ASTEROIDS, Constants.Groups.SPACESHIP,
-        {
-
-          handleCollision: (asteroid:Entity, spaceship:Entity) => {
+      this.collisionPairs.add(new CollisionPair(this, Constants.Groups.ASTEROIDS, Constants.Groups.SPACESHIP, {
+          /**
+           * Asteroids collide with Spaceships
+           * @param game
+           * @param asteroid
+           * @param spaceship
+           */
+          handleCollision: (game:entity, asteroid:Entity, spaceship:Entity) => {
+            var p:Point = this.pm.get(spaceship).position;
             spaceship.deleteFromWorld();
+            this.gm.get(game).lives--;
+            this.world.createEntityFromTemplate('spaceship_death', p.x, p.y).addToWorld();
           }
         }));
     }
 
 
     protected processEntities(entities:ImmutableBag<Entity>) {
+      var e = entities.get(0);
+
       for (var i = 0; this.collisionPairs.size() > i; i++) {
-        this.collisionPairs.get(i).checkForCollisions();
+        this.collisionPairs.get(i).checkForCollisions(e);
       }
     }
 
@@ -99,7 +110,7 @@ module asteroids.systems {
   }
 
   interface CollisionHandler {
-    handleCollision(a:Entity, b:Entity);
+    handleCollision(e:Entity, a:Entity, b:Entity);
   }
   /**
    * Collision Pair
@@ -124,22 +135,32 @@ module asteroids.systems {
       this.handler = handler;
     }
 
-    public checkForCollisions() {
+    /**
+     *
+     * @param e
+     */
+    public checkForCollisions(e:Entity) {
       for (var a = 0; this.groupEntitiesA.size() > a; a++) {
         var entityA:Entity = this.groupEntitiesA.get(a);
         for (var b = 0; this.groupEntitiesB.size() > b; b++) {
           var entityB:Entity = this.groupEntitiesB.get(b);
           if (this.collisionExists(entityA, entityB)) {
-            this.handler.handleCollision(entityA, entityB);
+            this.handler.handleCollision(e, entityA, entityB);
           }
         }
       }
     }
+
+    /**
+     *
+     * @param e1
+     * @param e2
+     * @returns {boolean}
+     */
     protected collisionExists(e1:Entity, e2:Entity):boolean {
 
       if (e1 === null || e2 === null) return false;
 
-      //NPE!!!
       var p1:Point = this.parent.pm.get(e1).position;
       var p2:Point = this.parent.pm.get(e2).position;
 

@@ -53,7 +53,6 @@ module asteroids.systems {
       if (game.playing) {
         var ships = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.SPACESHIP);
         if (ships.isEmpty()) {
-        //if (!this.world.getManager<TagManager>(TagManager).isRegistered(Constants.Tags.SPACESHIP)) {
           if (game.lives > 0) {
 
             var newSpaceshipPosition = new Point(this.config.width * 0.5, this.config.height * 0.5);
@@ -74,17 +73,11 @@ module asteroids.systems {
               this.world.createEntityFromTemplate('spaceship').addToWorld();
             }
           }
-        }
-        var asteroids = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.ASTEROIDS);
-        var bullets = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.BULLETS);
-
-        var ships = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.SPACESHIP);
-        if (!ships.isEmpty()) {
-        //if (this.world.getManager<TagManager>(TagManager).isRegistered(Constants.Tags.SPACESHIP)) {
-
-          //var ship:Entity = this.world.getManager<TagManager>(TagManager).getEntity(Constants.Tags.SPACESHIP);
+        } else {
           var ship = ships.get(0);
           var shipPos:Position = <Position>ship.getComponentByType(Position);
+          var asteroids = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.ASTEROIDS);
+          var bullets = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.BULLETS);
           // Level Over?
           if (asteroids.isEmpty() && bullets.isEmpty()) {
             game.level++;

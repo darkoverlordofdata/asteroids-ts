@@ -1,6 +1,7 @@
 module asteroids.systems {
 
   import Animation = asteroids.components.Animation;
+  import IAnimation = asteroids.components.IAnimation;
   import Mapper = artemis.annotations.Mapper;
 
   import EntityProcessingSystem = artemis.systems.EntityProcessingSystem;
@@ -19,7 +20,8 @@ module asteroids.systems {
     }
 
     protected processEach(e:Entity) {
-      var animation:any = this.am.get(e);
+      var animation:IAnimation = this.am.get(e).animation;
+      console.log(e, animation);
       animation.animate(this.world.getDelta());
 
     }

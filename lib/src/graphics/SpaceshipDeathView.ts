@@ -1,8 +1,9 @@
 module asteroids.graphics {
 
   import Point = asteroids.ui.Point;
+  import IAnimation = asteroids.components.IAnimation;
 
-  export class SpaceshipDeathView {
+  export class SpaceshipDeathView implements IAnimation {
 
     /** @type {number}*/
     public x:number = 0;
@@ -92,8 +93,7 @@ module asteroids.graphics {
      * draw the view
      */
     public draw() {
-      var graphic;
-      graphic = this.graphic;
+      var graphic = this.graphic;
 
       // shape1
       graphic.save();
