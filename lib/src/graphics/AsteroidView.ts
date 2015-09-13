@@ -1,5 +1,7 @@
 module asteroids.graphics {
 
+  const Tau = Math.PI * 2;
+
   import Point = asteroids.ui.Point;
 
   export class AsteroidView {
@@ -44,7 +46,7 @@ module asteroids.graphics {
       this.height = this.radius;
       this.points = [];
       angle = 0;
-      while (angle < Math.PI * 2) {
+      while (angle < Tau) {
         length = (0.75 + Math.random() * 0.25) * this.radius;
         posX = Math.cos(angle) * length;
         posY = Math.sin(angle) * length;

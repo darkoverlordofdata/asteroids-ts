@@ -22,16 +22,18 @@ module asteroids.templates {
     public buildEntity(entity:artemis.Entity, world:artemis.World, x:number, y:number):artemis.Entity {
 
       var dying = new SpaceshipDeathView(EntitySystem.blackBoard.getEntry('2d'));
+      var death = new DeathThroes();
+      death.initialize(5, () => {
+        world.getManager<TagManager>(TagManager).unregister(Constants.Tags.SPACESHIP);
+      });
 
       //entity.addComponent(Spaceship);
       entity.addComponent(Display, dying);
       entity.addComponent(Animation, dying);
-      entity.addComponent(DeathThroes, 5);
+      entity.addComponent(death);
       entity.addComponent(Position, x, y);
       entity.addComponent(Audio);
-
-      //world.getManager<GroupManager>(GroupManager).add(entity, Constants.Groups.SPACESHIP);
-
+      world.getManager<TagManager>(TagManager).register(Constants.Tags.SPACESHIP, entity);
       return entity;
 
 

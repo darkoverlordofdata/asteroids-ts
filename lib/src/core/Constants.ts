@@ -7,8 +7,8 @@ module asteroids {
 
     public static Tags = {
       START: 'start',
-      GAME: 'game'
-      //SPACESHIP: 'spaceship'
+      GAME: 'game',
+      SPACESHIP: 'spaceship'
 
     };
 

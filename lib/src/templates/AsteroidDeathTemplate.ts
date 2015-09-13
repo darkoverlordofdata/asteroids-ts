@@ -27,7 +27,6 @@ module asteroids.templates {
       entity.addComponent(DeathThroes, 3);
       entity.addComponent(Position, x, y);
       entity.addComponent(Audio);
-      //world.getManager<GroupManager>(GroupManager).add(entity, Constants.Groups.ASTEROIDS);
 
       return entity;
     }

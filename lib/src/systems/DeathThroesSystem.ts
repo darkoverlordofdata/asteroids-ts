@@ -7,6 +7,8 @@ module asteroids.systems {
   import ComponentMapper = artemis.ComponentMapper;
   import Aspect = artemis.Aspect;
   import Entity = artemis.Entity;
+  import TagManager = artemis.managers.TagManager;
+  import Constants = asteroids.Constants;
 
   export class DeathThroesSystem extends EntityProcessingSystem {
 
@@ -26,6 +28,9 @@ module asteroids.systems {
 
       death.duration -= time;
       if (death.duration <= 0) {
+        if (death.callback) {
+          death.callback(e);
+        }
         this.world.deleteEntity(e);
       }
     }

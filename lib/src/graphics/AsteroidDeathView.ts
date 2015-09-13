@@ -1,5 +1,7 @@
 module asteroids.graphics {
 
+  const Tau = Math.PI * 2;
+
   import Point = asteroids.ui.Point;
   import IAnimation = asteroids.components.IAnimation;
 
@@ -134,7 +136,7 @@ module asteroids.graphics {
       graphic.translate(x, y);
       graphic.rotate(this.rotation);
       graphic.fillStyle = "#FFFFFF";
-      graphic.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+      graphic.arc(this.x, this.y, 2, 0, Tau, false);
       graphic.fill();
       graphic.restore();
     }

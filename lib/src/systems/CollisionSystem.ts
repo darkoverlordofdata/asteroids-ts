@@ -59,7 +59,7 @@ module asteroids.systems {
            * @param bullet
            * @param asteroid
            */
-          handleCollision: (game:entity, bullet:Entity, asteroid:Entity) => {
+          handleCollision: (game:Entity, bullet:Entity, asteroid:Entity) => {
             var c1:Collision = this.cm.get(asteroid);
             var p1:Point = this.pm.get(asteroid).position;
             if (c1.radius > 10) {
@@ -86,11 +86,12 @@ module asteroids.systems {
            * @param asteroid
            * @param spaceship
            */
-          handleCollision: (game:entity, asteroid:Entity, spaceship:Entity) => {
+          handleCollision: (game:Entity, asteroid:Entity, spaceship:Entity) => {
             var p:Point = this.pm.get(spaceship).position;
             spaceship.deleteFromWorld();
+            var e = this.world.createEntityFromTemplate('spaceship_death', p.x, p.y);
+            e.addToWorld();
             this.gm.get(game).lives--;
-            this.world.createEntityFromTemplate('spaceship_death', p.x, p.y).addToWorld();
           }
         }));
     }

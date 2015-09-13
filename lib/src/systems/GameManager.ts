@@ -32,6 +32,12 @@ module asteroids.systems {
     /** @type {asteroids.GameConfig}*/
     public config:GameConfig = null;
 
+    /** @type {artemis.managers.TagManager} */
+    private tags:TagManager;
+
+    /** *@type {artemis.managers.GroupManager} */
+    private groups:GroupManager;
+
     private state:GameState;
     /**
      * @constructor
@@ -42,6 +48,11 @@ module asteroids.systems {
       this.config = config;
     }
 
+    public initialize() {
+      this.tags = this.world.getManager<TagManager>(TagManager);
+      this.groups = this.world.getManager<GroupManager>(GroupManager);
+    }
+
     public processEntities(entities:ImmutableBag<Entity>) {
       for (var i=0, k=entities.size(); i<k; i++) {
         this.processEach(entities.get(i));
@@ -49,15 +60,18 @@ module asteroids.systems {
     }
 
     protected processEach(e:Entity) {
+      if (this.tags.isRegistered(Constants.Tags.SPACESHIP)) {
+        return;
+      }
       var game:GameState = this.gm.get(e);
       if (game.playing) {
-        var ships = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.SPACESHIP);
+        var ships = this.groups.getEntities(Constants.Groups.SPACESHIP);
         if (ships.isEmpty()) {
           if (game.lives > 0) {
 
             var newSpaceshipPosition = new Point(this.config.width * 0.5, this.config.height * 0.5);
             var clearToAddSpaceship = true;
-            var asteroids = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.ASTEROIDS);
+            var asteroids = this.groups.getEntities(Constants.Groups.ASTEROIDS);
 
             for (var i=0, k=asteroids.size(); i<k; i++) {
               var asteroid:Entity = asteroids.get(i);
@@ -76,8 +90,8 @@ module asteroids.systems {
         } else {
           var ship = ships.get(0);
           var shipPos:Position = <Position>ship.getComponentByType(Position);
-          var asteroids = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.ASTEROIDS);
-          var bullets = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.BULLETS);
+          var asteroids = this.groups.getEntities(Constants.Groups.ASTEROIDS);
+          var bullets = this.groups.getEntities(Constants.Groups.BULLETS);
           // Level Over?
           if (asteroids.isEmpty() && bullets.isEmpty()) {
             game.level++;

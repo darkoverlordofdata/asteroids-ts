@@ -21,7 +21,6 @@ module asteroids.systems {
 
     protected processEach(e:Entity) {
       var animation:IAnimation = this.am.get(e).animation;
-      console.log(e, animation);
       animation.animate(this.world.getDelta());
 
     }

@@ -1,5 +1,7 @@
 module asteroids.graphics {
 
+  const Tau = Math.PI * 2;
+
   export class BulletView {
 
     /** @type {number}*/
@@ -32,13 +34,12 @@ module asteroids.graphics {
      * draw the view
      */
     public draw() {
-      var graphic;
-      graphic = this.graphic;
+      var graphic = this.graphic;
       graphic.save();
       graphic.beginPath();
       graphic.rotate(this.rotation);
-      graphic.fillStyle = "#FFFFFF";
-      graphic.arc(this.x, this.y, 2, 0, Math.PI * 2, false);
+      graphic.fillStyle = '#FFFFFF';
+      graphic.arc(this.x, this.y, 2, 0, Tau, false);
       graphic.fill();
       graphic.restore();
     }

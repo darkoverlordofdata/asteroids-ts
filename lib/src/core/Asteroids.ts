@@ -37,8 +37,9 @@ module asteroids {
   import GameTemplate = asteroids.templates.GameTemplate;
   import SpaceshipTemplate = asteroids.templates.SpaceshipTemplate;
   import WaitTemplate = asteroids.templates.WaitTemplate;
-
   import KeyPoll = asteroids.ui.KeyPoll;
+
+  import TrigLUT = artemis.utils.TrigLUT;;
   import World = artemis.World;
   import EntitySystem = artemis.EntitySystem;
   import GroupManager = artemis.managers.GroupManager;
@@ -74,6 +75,7 @@ module asteroids {
      * @param {number} height
      */
     constructor(graphic, width, height) {
+      TrigLUT.init(true);
       EntitySystem.blackBoard.setEntry('2d', graphic);
       this.graphic = graphic;
       this.prepare(width, height);

@@ -1,6 +1,6 @@
 module asteroids.graphics {
 
-  import Signal0 = ash.signals.Signal0;
+  import Signal0 = artemis.signals.Signal0;
 
   export class WaitForStartView {
 
@@ -31,7 +31,7 @@ module asteroids.graphics {
     /** @type {Function}*/
     public instructions:Function = null;
 
-    /** @type {ash.signals.Signal0}*/
+    /** @type {artemis.signals.Signal0}*/
     public click:Signal0 = null;
 
     /**
@@ -55,7 +55,7 @@ module asteroids.graphics {
       this.graphic.save();
       this.graphic.beginPath();
       this.graphic.font = 'bold 32px Helvetica';
-      this.graphic.fillStyle = '#FFFFFF';  //FFFFFF'
+      this.graphic.fillStyle = '#FFFFFF';
 
       s = 'ASTEROIDS';
       l = this.graphic.measureText(s);
@@ -96,7 +96,6 @@ module asteroids.graphics {
       this.graphic.fillStyle = '#FFFFFF';
 
       s = 'CTRL-Z to Fire  ~  Arrow Keys to Move';
-      l = this.graphic.measureText(s);
       x = 10;
       y = window.innerHeight * window.devicePixelRatio - 20;
       this.graphic.fillText(s, x, y);

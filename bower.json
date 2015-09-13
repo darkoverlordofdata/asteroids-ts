@@ -18,7 +18,6 @@
     "tests"
   ],
   "devDependencies": {
-    "ash": "git://github.com/darkoverlordofdata/ash.coffee",
     "artemists": "git://github.com/darkoverlordofdata/artemists",
     "closure-compiler": "~0.2.7",
     "google-closure-library": "*"
@@ -33,7 +32,6 @@
     ],
     "path": "web/src",
     "sources": {
-      "ash": "packages/ash/build/ash.js",
       "artemists": "packages/artemists/build/artemis.js",
       "stats.js":"packages/stats.js/build/stats.min.js"
     }
