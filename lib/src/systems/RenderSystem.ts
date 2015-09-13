@@ -27,29 +27,27 @@ module asteroids.systems {
 
     public processEntities(entities:ImmutableBag<Entity>) {
 
-      var e:Entity;
-      var position:Position;
-      var display:Display;
-      var graphic;
-
       this.graphic.save();
       this.graphic.translate(0, 0);
       this.graphic.rotate(0);
       this.graphic.clearRect(0, 0, this.graphic.canvas.width, this.graphic.canvas.height);
 
       for (var i=0, k=entities.size(); i<k; i++) {
-        e = entities.get(i);
-        position =  this.pm.get(e);
-        display = this.dm.get(e);
-        graphic = display.graphic;
-        graphic.x = position.position.x;
-        graphic.y = position.position.y;
-        graphic.rotation = position.rotation;
-        graphic.draw();
-
+        this.processEach(entities.get(i));
       }
       this.graphic.restore();
     }
 
+    public processEach(e:Entity) {
+
+      var position =  this.pm.get(e);
+      var display = this.dm.get(e);
+      var graphic = display.graphic;
+      graphic.x = position.position.x;
+      graphic.y = position.position.y;
+      graphic.rotation = position.rotation;
+      graphic.draw();
+
+    }
   }
 }

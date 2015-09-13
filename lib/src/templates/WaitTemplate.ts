@@ -3,6 +3,7 @@ module asteroids.templates {
   import EntityTemplate = artemis.annotations.EntityTemplate;
   import IEntityTemplate = artemis.IEntityTemplate;
   import EntitySystem = artemis.EntitySystem;
+  import TagManager = artemis.managers.TagManager;
 
   import WaitForStartView = asteroids.graphics.WaitForStartView;
   import WaitForStart = asteroids.components.WaitForStart;
@@ -20,6 +21,7 @@ module asteroids.templates {
       entity.addComponent(WaitForStart, waitView, false);
       entity.addComponent(Display, waitView);
       entity.addComponent(Position, 0, 0);
+      world.getManager<TagManager>(TagManager).register(Constants.Tags.START, entity);
       return entity;
     }
   }

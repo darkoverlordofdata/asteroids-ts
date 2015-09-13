@@ -3,12 +3,14 @@ module asteroids.templates {
   import EntityTemplate = artemis.annotations.EntityTemplate;
   import IEntityTemplate = artemis.IEntityTemplate;
   import EntitySystem = artemis.EntitySystem;
+  import TagManager = artemis.managers.TagManager;
 
   import HudView = asteroids.graphics.HudView;
   import GameState = asteroids.components.GameState;
   import Display = asteroids.components.Display;
   import Position = asteroids.components.Position;
   import Hud = asteroids.components.Hud;
+  import Constants = asteroids.Constants;
 
   @EntityTemplate('game')
   export class GameTemplate implements IEntityTemplate {
@@ -19,7 +21,8 @@ module asteroids.templates {
       entity.addComponent(state);
       entity.addComponent(Display, hud);
       entity.addComponent(Position, 0, 0);
-      entity.addComponent(Hud);
+      entity.addComponent(Hud, hud);
+      world.getManager<TagManager>(TagManager).register(Constants.Tags.GAME, entity);
       return entity;
     }
   }

@@ -7,7 +7,7 @@ module asteroids.templates {
 
   import BulletView = asteroids.graphics.BulletView;
   import Constants = asteroids.Constants;
-  import Bullet = asteroids.components.Asteroid;
+  import Bullet = asteroids.components.Bullet;
   import Display = asteroids.components.Display;
   import Position = asteroids.components.Position;
   import Motion = asteroids.components.Motion;

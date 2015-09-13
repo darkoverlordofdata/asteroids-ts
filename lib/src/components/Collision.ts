@@ -1,8 +1,11 @@
 module asteroids.components {
 	
 	import Component = artemis.Component;
+  import PooledComponent = artemis.PooledComponent;
+  import Pooled = artemis.annotations.Pooled;
 
-	export class Collision extends Component {
+  @Pooled()
+	export class Collision extends PooledComponent {
 
     /** @type {string} */
     public static className = 'Collision';

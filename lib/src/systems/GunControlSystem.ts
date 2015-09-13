@@ -22,28 +22,29 @@ module asteroids.systems {
     @Mapper(Position) pm:ComponentMapper<Position>;
 
     /** @type {asteroids.input.KeyPoll}*/
-    public keyPoll = null;
+    public keyPoll:KeyPoll;
 
     /**
      * @constructor
      */
     constructor(keyPoll:KeyPoll) {
-      super(Aspect.getAspectForAll(Animation));
+      super(Aspect.getAspectForAll(GunControls, Gun, Position));
       this.keyPoll = keyPoll;
     }
 
     protected processEach(e:Entity) {
 
-      //var control, gun, position;
-      //control = node.control;
-      //position = node.position;
-      //gun = node.gun;
-      //gun.shooting = this.keyPoll.isDown(control.trigger);
-      //gun.timeSinceLastShot += time;
-      //if (gun.shooting && gun.timeSinceLastShot >= gun.minimumShotInterval) {
-      //  this.creator.createUserBullet(gun, position);
-      //  gun.timeSinceLastShot = 0;  // Void
-      //}
+      var time = this.world.getDelta();
+      var control:GunControls = this.cm.get(e);
+      var position:Position = this.pm.get(e);
+      var gun:Gun = this.gm.get(e);
+
+      gun.shooting = this.keyPoll.isDown(control.trigger);
+      gun.timeSinceLastShot += time;
+      if (gun.shooting && gun.timeSinceLastShot >= gun.minimumShotInterval) {
+        this.world.createEntityFromTemplate('bullet', gun, position).addToWorld();
+        gun.timeSinceLastShot = 0;
+      }
     }
   }
 }

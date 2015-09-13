@@ -10,7 +10,7 @@ module asteroids.systems {
 
   export class DeathThroesSystem extends EntityProcessingSystem {
 
-    @Mapper(DeathThroes) am:ComponentMapper<DeathThroes>;
+    @Mapper(DeathThroes) dm:ComponentMapper<DeathThroes>;
 
 
     /**
@@ -21,12 +21,13 @@ module asteroids.systems {
     }
 
     protected processEach(e:Entity) {
-      //var c:DeathThroes = this.am.get(e);
-      //
-      //c.duration -= this.world.delta;
-      //if (c.duration <= 0) {
-      //  this.creator.destroyEntity(node.entity);  // Void
-      //}
+      var time = this.world.getDelta();
+      var death:DeathThroes = this.dm.get(e);
+
+      death.duration -= time;
+      if (death.duration <= 0) {
+        this.world.deleteEntity(e);
+      }
     }
   }
 }

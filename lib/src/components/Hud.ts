@@ -1,6 +1,7 @@
 module asteroids.components {
 	
 	import Component = artemis.Component;
+  import HudView = asteroids.graphics.HudView;
 
 	export class Hud extends Component {
 
@@ -11,12 +12,12 @@ module asteroids.components {
      * initialize the component
      * @param view
      */
-		public initialize(view:Object=null) {
+		public initialize(view:HudView) {
       this.view = view;
     }
 
     /** @type {Object} */
-     public view:Object;
+     public view:HudView;
 	}
 
   Hud.prototype.view = null;

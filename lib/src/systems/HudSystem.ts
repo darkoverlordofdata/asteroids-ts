@@ -23,9 +23,11 @@ module asteroids.systems {
     }
 
     protected processEach(e:Entity) {
-      //var c:Animation = this.am.get(e);
-      //node.hud.view.setLives(node.state.lives);
-      //node.hud.view.setScore(node.state.hits);  // Void
+      var state:GameState = this.gm.get(e);
+      var hud:Hud = this.hm.get(e);
+
+      hud.view.setLives(state.lives);
+      hud.view.setScore(state.hits);
     }
   }
 }

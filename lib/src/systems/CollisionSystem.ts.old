@@ -1,0 +1,125 @@
+module asteroids.systems {
+
+  import Animation = asteroids.components.Animation;
+  import Asteroid = asteroids.components.Asteroid;
+  import Audio = asteroids.components.Audio;
+  import Bullet = asteroids.components.Bullet;
+  import Collision = asteroids.components.Collision;
+  import DeathThroes = asteroids.components.DeathThroes;
+  import Display = asteroids.components.Display;
+  import GameState = asteroids.components.GameState;
+  import Gun = asteroids.components.Gun;
+  import GunControls = asteroids.components.GunControls;
+  import Hud = asteroids.components.Hud;
+  import Motion = asteroids.components.Motion;
+  import MotionControls = asteroids.components.MotionControls;
+  import Position = asteroids.components.Position;
+  import Spaceship = asteroids.components.Spaceship;
+  import WaitForStart = asteroids.components.WaitForStart;
+
+  import AsteroidDeathView = asteroids.graphics.AsteroidDeathView;
+  import AsteroidView = asteroids.graphics.AsteroidView;
+  import BulletView = asteroids.graphics.BulletView;
+  import HudView = asteroids.graphics.HudView;
+  import SpaceshipDeathView = asteroids.graphics.SpaceshipDeathView;
+  import SpaceshipView = asteroids.graphics.SpaceshipView;
+
+  import EntitySystem = artemis.EntitySystem;
+  import Mapper = artemis.annotations.Mapper;
+  import ComponentMapper = artemis.ComponentMapper;
+  import Aspect = artemis.Aspect;
+  import ImmutableBag = artemis.utils.ImmutableBag;
+  import Entity = artemis.Entity;
+  import GroupManager = artemis.managers.GroupManager;
+
+  export class CollisionSystem extends EntitySystem {
+
+    @Mapper(Position) pm:ComponentMapper<Position>;
+    @Mapper(Collision) cm:ComponentMapper<Collision>;
+    @Mapper(Spaceship) sm:ComponentMapper<Spaceship>;
+    @Mapper(Asteroid) am:ComponentMapper<Asteroid>;
+    @Mapper(Bullet) bm:ComponentMapper<Bullet>;
+
+    constructor() {
+      super(Aspect.getAspectForAll(Position, Collision);
+    }
+
+
+    protected processEntities(entities:ImmutableBag<Entity>) {
+      for (var i=0, k=entities.size(); i<k; i++) {
+        this.processEach(entities.get(i));
+      }
+    }
+
+    public processEach(e:Entity) {
+
+      var position:Position = this.pm.get(e);
+      var spaceship:Spaceship = this.sm.get(e);
+      var asteroid:Asteroid = this.am.get(e);
+      var bullet:Bullet = this.bm.get(e);
+
+      if (spaceship) {
+      } else if (asteroid) {
+      } else if (bullet) {
+      }
+
+
+      //var asteroids = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.ASTEROIDS);
+      //var bullets = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.BULLETS);
+      //if (!bullets.isEmpty() && !asteroids.isEmpty()) {
+      //  for (var b=0, nb=bullets.size(); b<nb; b++) {
+      //    var bullet = bullets.get(b);
+      //    for (var a=0, na=asteroids.size(); a<na; a++) {
+      //      var asteroid = asteroids.get(a);
+      //      var c1:Collision = <Collision>asteroid.getComponentByType(Collision);
+      //      var p1:Position = <Position>asteroid.getComponentByType(Position);
+      //      var p2:Position = <Position>bullet.getComponentByType(Position);
+      //      if (p1.position.distanceTo(p2.position) <= c1.radius) {
+      //        /*
+      //         You hit an asteroid
+      //         */
+      //        this.world.deleteEntity(bullet);
+      //        if (c1.radius > 10) {
+      //          var r1 = c1.radius - 10;
+      //          var x1 = p1.position.x + Math.random() * 10 - 5;
+      //          var y1 = p1.position.y + Math.random() * 10 - 5;
+      //          this.world.createEntityFromTemplate('asteroid', r1, x1, y1).addToWorld();
+      //          x1 = p1.position.x + Math.random() * 10 - 5;
+      //          y1 = p1.position.y + Math.random() * 10 - 5;
+      //          this.world.createEntityFromTemplate('asteroid', r1, x1, y1).addToWorld();
+      //        }
+      //        this.world.deleteEntity(asteroid);
+      //        //asteroid.asteroid.fsm.changeState("destroyed");
+      //        //asteroid.audio.play(ExplodeAsteroid)
+      //        this.state.hits++;
+      //        break;
+      //      }
+      //    }
+      //  }
+      //
+      //}
+      //var ships = this.world.getManager<GroupManager>(GroupManager).getEntities(Constants.Groups.SPACESHIP);
+      //if (!ships.isEmpty()) {
+      //  var ship:Entity = ships.get(0);
+      //  for (var a=0, na=asteroids.size(); a<na; a++) {
+      //    var asteroid = asteroids.get(a);
+      //    var c1:Collision = <Collision>asteroid.getComponentByType(Collision);
+      //    var p1:Position = <Position>asteroid.getComponentByType(Position);
+      //    var c2:Collision = <Collision>ship.getComponentByType(Collision);
+      //    var p2:Position = <Position>ship.getComponentByType(Position);
+      //
+      //    if (p1.position.distanceTo(p2.position) <= c1.radius + c2.radius) {
+      //      /*
+      //       You were hit
+      //       */
+      //      this.world.deleteEntity(ship);
+      //      //spaceship.spaceship.fsm.changeState("destroyed");
+      //      //asteroid.audio.play(ExplodeShip)
+      //      this.state.lives--;
+      //      break;
+      //    }
+      //  }
+      //}
+    }
+  }
+}

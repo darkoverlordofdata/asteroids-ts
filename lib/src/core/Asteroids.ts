@@ -41,26 +41,31 @@ module asteroids {
   import KeyPoll = asteroids.ui.KeyPoll;
   import World = artemis.World;
   import EntitySystem = artemis.EntitySystem;
+  import GroupManager = artemis.managers.GroupManager;
+  import TagManager = artemis.managers.TagManager;
 
   export class Asteroids {
 
+    /** @type {asteroids.components.GameState} */
     public state:GameState;
 
-    public monitor = null;
+    /** @type {Object} */
+    public monitor;
 
+    /** @type {asteroids.systems.RenderSystem} */
     private renderSystem:RenderSystem;
 
     /** @type {CanvasRenderingContext2D} 2D Canvas*/
-    public graphic = null;
+    public graphic;
 
     /** @type {artemis.World} Engine*/
-    public world:World = null;
+    public world:World;
 
-    /** @type {asteroids.ui.KeyPoll}*/
-    public keyPoll:KeyPoll = null;
+    /** @type {asteroids.ui.KeyPoll} */
+    public keyPoll:KeyPoll;
 
     /** @type {asteroids.GameConfig}*/
-    public config:GameConfig = null;
+    public config:GameConfig;
 
     /**
      * @constructor
@@ -86,6 +91,8 @@ module asteroids {
       var keyPoll = this.keyPoll = new KeyPoll(window);
       var config = this.config = new GameConfig(width, height);
 
+      world.setManager(new GroupManager());
+      world.setManager(new TagManager());
       world.setSystem(new WaitForStartSystem());
       world.setSystem(new GameManager(config));
       world.setSystem(new MotionControlSystem(keyPoll));
@@ -105,15 +112,6 @@ module asteroids {
 
     }
 
-    public update = (delta:number) => {
-      this.monitor.begin();
-      this.world.setDelta(delta);
-      this.world.process();
-      this.renderSystem.process();
-      requestAnimationFrame(this.update);
-      this.monitor.end();
-
-    };
     /**
      * Start animation
      */
@@ -132,7 +130,23 @@ module asteroids {
         document.body.appendChild(this.monitor["domElement"]);
       }
 
-      requestAnimationFrame(this.update);
+      var temp = 0;
+      var previousTime = 0;
+      var update = (delta:number) => {
+
+        temp = previousTime || delta;
+        previousTime = delta;
+
+        this.monitor.begin();
+        this.world.setDelta((delta - temp) * 0.001);
+        this.world.process();
+        this.renderSystem.process();
+        requestAnimationFrame(update);
+        this.monitor.end();
+
+      };
+
+      requestAnimationFrame(update);
     }
 
   }

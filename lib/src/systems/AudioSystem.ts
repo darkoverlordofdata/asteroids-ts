@@ -20,14 +20,14 @@ module asteroids.systems {
     }
 
     protected processEach(e:Entity) {
-      var c:Audio = this.am.get(e);
+      var audio:Audio = this.am.get(e);
 
-      for (var i in c.toPlay) {
-        var Type:any = c.toPlay[i];
+      for (var i in audio.toPlay) {
+        var Type:any = audio.toPlay[i];
         var sound = new Type();
         sound.play(0, 1);
       }
-      c.toPlay.length = 0
+      audio.toPlay.length = 0
     }
   }
 }

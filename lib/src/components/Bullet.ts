@@ -1,8 +1,10 @@
 module asteroids.components {
 	
-	import Component = artemis.Component;
+	import PooledComponent = artemis.PooledComponent;
+  import Pooled = artemis.annotations.Pooled;
 
-	export class Bullet extends Component {
+  @Pooled()
+	export class Bullet extends PooledComponent {
 
     /** @type {string} */
     public static className = 'Bullet';

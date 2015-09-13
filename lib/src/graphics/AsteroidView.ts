@@ -48,8 +48,7 @@ module asteroids.graphics {
         length = (0.75 + Math.random() * 0.25) * this.radius;
         posX = Math.cos(angle) * length;
         posY = Math.sin(angle) * length;
-        this.points.push(new Point(this.x, this.y));
-
+        this.points.push(new Point(posX, posY));
         angle += Math.random() * 0.5;
       }
     }
@@ -58,16 +57,16 @@ module asteroids.graphics {
      * draw the view
      */
     public draw() {
-      var graphic, i;
-      graphic = this.graphic;
+
+      var graphic = this.graphic;
       graphic.save();
       graphic.beginPath();
       graphic.translate(this.x, this.y);
       graphic.rotate(this.rotation);
       graphic.fillStyle = "#FFFFFF";
       graphic.moveTo(this.radius, 0);
-      i = 0;
 
+      var i = 0;
       while (i < this.points.length) {
         graphic.lineTo(this.points[i].x, this.points[i].y);
         ++i;

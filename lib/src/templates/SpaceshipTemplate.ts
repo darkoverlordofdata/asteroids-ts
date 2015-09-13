@@ -3,6 +3,7 @@ module asteroids.templates {
   import EntityTemplate = artemis.annotations.EntityTemplate;
   import IEntityTemplate = artemis.IEntityTemplate;
   import EntitySystem = artemis.EntitySystem;
+  import TagManager = artemis.managers.TagManager;
   import GroupManager = artemis.managers.GroupManager;
 
   import SpaceshipView = asteroids.graphics.SpaceshipView;
@@ -37,6 +38,7 @@ module asteroids.templates {
       entity.addComponent(GunControls, KEY_Z);
       entity.addComponent(Collision, 9);
       entity.addComponent(Audio);
+      //world.getManager<TagManager>(TagManager).register(Constants.Tags.SPACESHIP, entity);
       world.getManager<GroupManager>(GroupManager).add(entity, Constants.Groups.SPACESHIP);
 
       return entity;

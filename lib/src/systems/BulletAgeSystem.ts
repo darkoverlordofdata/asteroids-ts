@@ -11,9 +11,6 @@ module asteroids.systems {
   export class BulletAgeSystem extends EntityProcessingSystem {
     @Mapper(Bullet) bm:ComponentMapper<Bullet>;
 
-    /** @type {asteroids.EntityCreator}*/
-    public creator = null;
-
     /**
      * @constructor
      */
@@ -22,12 +19,13 @@ module asteroids.systems {
     }
 
     protected processEach(e:Entity) {
+      var time = this.world.getDelta();
       var bullet:Bullet = this.bm.get(e);
 
-      //bullet.lifeRemaining -= time;
-      //if (bullet.lifeRemaining <= 0) {
-      //  this.creator.destroyEntity(node.entity);  // Void
-      //}
+      bullet.lifeRemaining -= time;
+      if (bullet.lifeRemaining <= 0) {
+        this.world.deleteEntity(e);
+      }
     }
   }
 

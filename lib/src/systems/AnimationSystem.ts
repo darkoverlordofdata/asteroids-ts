@@ -19,8 +19,8 @@ module asteroids.systems {
     }
 
     protected processEach(e:Entity) {
-      var c:Animation = this.am.get(e);
-      //c.animation.animate(this.world.delta);
+      var animation:any = this.am.get(e);
+      animation.animate(this.world.getDelta());
 
     }
   }

@@ -1,8 +1,10 @@
 module asteroids.components {
 	
-	import Component = artemis.Component;
+	import PooledComponent = artemis.PooledComponent;
+  import Pooled = artemis.annotations.Pooled;
 
-	export class Display extends Component {
+  @Pooled()
+	export class Display extends PooledComponent {
 
     /** @type {string} */
     public static className = 'Display';
@@ -16,7 +18,7 @@ module asteroids.components {
     }
 
     /** @type {Object} */
-     public graphic:Object;
+     public graphic:any;
 	}
 
   Display.prototype.graphic = null;

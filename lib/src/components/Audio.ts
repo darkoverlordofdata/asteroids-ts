@@ -7,10 +7,8 @@ module asteroids.components {
     /** @type {string} */
     public static className = 'Audio';
 
-    /**
-     * initialize the component
-     */
-		public initialize() {
+    constructor() {
+      super();
       this.toPlay = [];
     }
 

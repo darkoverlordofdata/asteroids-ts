@@ -2,8 +2,11 @@ module asteroids.components {
 	
 	import Component = artemis.Component;
   import Point = asteroids.ui.Point;
+  import PooledComponent = artemis.PooledComponent;
+  import Pooled = artemis.annotations.Pooled;
 
-	export class Position extends Component {
+  @Pooled()
+	export class Position extends PooledComponent {
 
     /** @type {string} */
     public static className = 'Position';
