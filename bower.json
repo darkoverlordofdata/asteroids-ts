@@ -23,7 +23,8 @@
     "google-closure-library": "*"
   },
   "dependencies": {
-    "stats.js": "*"
+    "stats.js": "*",
+    "pixi.js": "~3.0.7"
   },
   "install": {
     "ignore": [
@@ -33,7 +34,8 @@
     "path": "web/src",
     "sources": {
       "artemists": "packages/artemists/build/artemis.js",
-      "stats.js":"packages/stats.js/build/stats.min.js"
+      "pixi.js": "packages/pixi.js/bin/pixi.js",
+      "stats.js": "packages/stats.js/build/stats.min.js"
     }
   }
 }

@@ -27,7 +27,7 @@ module asteroids.graphics {
     public r2:number = 0;
 
     /** @type {CanvasRenderingContext2D}*/
-    public graphic = null;
+    public graphic:CanvasRenderingContext2D = null;
 
     /** @type {asteroids.ui.Point}*/
     public vel1:Point = null;
@@ -86,19 +86,19 @@ module asteroids.graphics {
       this.x2 += this.vel2.x * time;
       this.y2 += this.vel2.y * time;
       this.r2 += this.rot2 * time;
-      return this.draw();
+      return this.draw(this.graphic);
     }
 
     /**
      * draw the view
+     * @param {CanvasRenderingContext2D} graphic
      */
-    public draw() {
-      var graphic = this.graphic;
+    public draw(graphic:CanvasRenderingContext2D) {
 
       // shape1
       graphic.save();
       graphic.beginPath();
-      graphic.translate(this.x + this.x1, this.y + this.y1);
+      graphic.translate(~~(this.x + this.x1), ~~(this.y + this.y1));
       graphic.rotate(this.r1);
       graphic.fillStyle = "#FFFFFF";
       graphic.moveTo(10, 0);
@@ -111,7 +111,7 @@ module asteroids.graphics {
       // shape2
       graphic.save();
       graphic.beginPath();
-      graphic.translate(this.x + this.x2, this.y + this.y2);
+      graphic.translate(~~(this.x + this.x2), ~~(this.y + this.y2));
       graphic.rotate(this.r2);
       graphic.fillStyle = "#FFFFFF";
       graphic.moveTo(10, 0);

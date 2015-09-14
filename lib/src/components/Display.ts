@@ -11,15 +11,15 @@ module asteroids.components {
 
     /**
      * initialize the component
-     * @param graphic
+     * @param sprite
      */
-		public initialize(graphic:Object=null) {
-      this.graphic = graphic;
+		public initialize(sprite:Object=null) {
+      this.sprite = sprite;
     }
 
     /** @type {Object} */
-     public graphic:any;
+     public sprite:any;
 	}
 
-  Display.prototype.graphic = null;
+  Display.prototype.sprite = null;
 }

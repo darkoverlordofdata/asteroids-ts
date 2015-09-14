@@ -19,7 +19,7 @@ module asteroids.templates {
 
     public buildEntity(entity:artemis.Entity, world:artemis.World, radius:number, x:number, y:number):artemis.Entity {
 
-      var dying = new AsteroidDeathView(EntitySystem.blackBoard.getEntry('2d'), radius);
+      var dying = new AsteroidDeathView(<CanvasRenderingContext2D>EntitySystem.blackBoard.getEntry('2d'), radius);
 
       entity.addComponent(Asteroid);
       entity.addComponent(Display, dying);

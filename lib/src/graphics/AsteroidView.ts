@@ -22,7 +22,9 @@ module asteroids.graphics {
     public rotation:number = 0;
 
     /** @type {CanvasRenderingContext2D}*/
-    public graphic = null;
+    public graphic:CanvasRenderingContext2D = null;
+
+    public image:HTMLCanvasElement;
 
     /** @type {number}*/
     public radius:number = 0;
@@ -38,7 +40,7 @@ module asteroids.graphics {
      * @param {CanvasRenderingContext2D} graphic
      * @param {number} radius
      */
-    constructor(graphic, radius) {
+    constructor(graphic:CanvasRenderingContext2D, radius) {
       var angle, length, posX, posY;
       this.graphic = graphic;
       this.radius = radius;
@@ -48,19 +50,24 @@ module asteroids.graphics {
       angle = 0;
       while (angle < Tau) {
         length = (0.75 + Math.random() * 0.25) * this.radius;
-        posX = Math.cos(angle) * length;
-        posY = Math.sin(angle) * length;
+        posX = ~~((Math.cos(angle) * length)+0.5);
+        posY = ~~((Math.sin(angle) * length)+0.5);
         this.points.push(new Point(posX, posY));
         angle += Math.random() * 0.5;
       }
+
+      //this.image = document.createElement('canvas');
+      //this.image.width = this.width*2;
+      //this.image.height = this.height*2;
+      //this.draw(this.image.getContext('2d'));
     }
 
     /**
      * draw the view
+     * @param {CanvasRenderingContext2D} graphic
      */
-    public draw() {
+    public draw(graphic:CanvasRenderingContext2D) {
 
-      var graphic = this.graphic;
       graphic.save();
       graphic.beginPath();
       graphic.translate(this.x, this.y);

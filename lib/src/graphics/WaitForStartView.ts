@@ -20,7 +20,7 @@ module asteroids.graphics {
     public rotation:number = 0;
 
     /** @type {CanvasRenderingContext2D}*/
-    public graphic = null;
+    public graphic:CanvasRenderingContext2D = null;
 
     /** @type {Function}*/
     public gameOver:Function = null;
@@ -38,7 +38,7 @@ module asteroids.graphics {
      * @constructor
      * @param {CanvasRenderingContext2D} graphic
      */
-    constructor(graphic) {
+    constructor(graphic:CanvasRenderingContext2D) {
       this.graphic = graphic;
       this.click = new Signal0();
       this.gameOver = this.createGameOver;
@@ -49,67 +49,70 @@ module asteroids.graphics {
 
     /**
      * draw the game over button
+     * @param {CanvasRenderingContext2D} graphic
      */
-    public createGameOver() {
-      var l, s, x, y;
-      this.graphic.save();
-      this.graphic.beginPath();
-      this.graphic.font = 'bold 32px Helvetica';
-      this.graphic.fillStyle = '#FFFFFF';
+    public createGameOver(graphic:CanvasRenderingContext2D) {
 
-      s = 'ASTEROIDS';
-      l = this.graphic.measureText(s);
-      x = Math.floor(((window.innerWidth * window.devicePixelRatio) - l.width) / 2);
-      y = 175;
-      this.graphic.fillText(s, x, y);
-      this.graphic.fill();
-      this.graphic.restore();
+      graphic.save();
+      graphic.beginPath();
+      graphic.font = 'bold 32px Helvetica';
+      graphic.fillStyle = '#FFFFFF';
+
+      var s = 'ASTEROIDS';
+      var l = graphic.measureText(s);
+      var x = Math.floor(((window.innerWidth * window.devicePixelRatio) - l.width) / 2);
+      var y = 175;
+      graphic.fillText(s, ~~x, ~~y);
+      graphic.fill();
+      graphic.restore();
     }
 
     /**
      * draw the start button
+     * @param {CanvasRenderingContext2D} graphic
      */
-    public createClickToStart() {
-      var l, s, x, y;
-      this.graphic.save();
-      this.graphic.beginPath();
-      this.graphic.font = 'bold 18px Helvetica';
-      this.graphic.fillStyle = '#FFFFFF';
+    public createClickToStart(graphic:CanvasRenderingContext2D) {
 
-      s = 'CLICK TO START';
-      l = this.graphic.measureText(s);
-      x = Math.floor(((window.innerWidth * window.devicePixelRatio) - l.width) / 2);
-      y = 225;
-      this.graphic.fillText(s, x, y);
-      this.graphic.fill();
-      this.graphic.restore();
+      graphic.save();
+      graphic.beginPath();
+      graphic.font = 'bold 18px Helvetica';
+      graphic.fillStyle = '#FFFFFF';
+
+      var s = 'CLICK TO START';
+      var l = graphic.measureText(s);
+      var x = Math.floor(((window.innerWidth * window.devicePixelRatio) - l.width) / 2);
+      var y = 225;
+      graphic.fillText(s, ~~x, ~~y);
+      graphic.fill();
+      graphic.restore();
     }
 
     /**
      * draw the instructions
+     * @param {CanvasRenderingContext2D} graphic
      */
-    public createInstructions() {
-      var l, s, x, y;
-      this.graphic.save();
-      this.graphic.beginPath();
-      this.graphic.font = 'bold 14px Helvetica';
-      this.graphic.fillStyle = '#FFFFFF';
+    public createInstructions(graphic:CanvasRenderingContext2D) {
 
-      s = 'CTRL-Z to Fire  ~  Arrow Keys to Move';
-      x = 10;
-      y = window.innerHeight * window.devicePixelRatio - 20;
-      this.graphic.fillText(s, x, y);
-      this.graphic.fill();
-      this.graphic.restore();
+      graphic.save();
+      graphic.beginPath();
+      graphic.font = 'bold 14px Helvetica';
+      graphic.fillStyle = '#FFFFFF';
+
+      var s = 'CTRL-Z to Fire  ~  Arrow Keys to Move';
+      var x = 10;
+      var y = window.innerHeight * window.devicePixelRatio - 20;
+      graphic.fillText(s, ~~x, ~~y);
+      graphic.fill();
+      graphic.restore();
     }
 
     /**
      * draw the view
      */
-    public draw() {
-      this.gameOver();
-      this.clickToStart();
-      this.instructions();
+    public draw(graphic:CanvasRenderingContext2D) {
+      this.gameOver(graphic);
+      this.clickToStart(graphic);
+      this.instructions(graphic);
     }
   }
 }

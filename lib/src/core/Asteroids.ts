@@ -39,7 +39,7 @@ module asteroids {
   import WaitTemplate = asteroids.templates.WaitTemplate;
   import KeyPoll = asteroids.ui.KeyPoll;
 
-  import TrigLUT = artemis.utils.TrigLUT;;
+  import TrigLUT = artemis.utils.TrigLUT;
   import World = artemis.World;
   import EntitySystem = artemis.EntitySystem;
   import GroupManager = artemis.managers.GroupManager;
@@ -105,7 +105,7 @@ module asteroids {
       world.setSystem(new CollisionSystem());
       world.setSystem(new AnimationSystem());
       world.setSystem(new HudSystem());
-      this.renderSystem = world.setSystem(new RenderSystem(this.graphic), true);
+      this.renderSystem = world.setSystem(new RenderSystem(this.graphic, config), true);
       world.setSystem(new AudioSystem());
       world.initialize();
       world.createEntityFromTemplate('start_game', state).addToWorld();

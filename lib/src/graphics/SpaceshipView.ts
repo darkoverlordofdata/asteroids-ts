@@ -18,7 +18,7 @@ module asteroids.graphics {
     public rotation:number = 0;
 
     /** @type {CanvasRenderingContext2D}*/
-    public graphic = null;
+    public graphic:CanvasRenderingContext2D = null;
 
     /**
      * @constructor
@@ -30,13 +30,13 @@ module asteroids.graphics {
 
     /**
      * draw the view
+     * @param {CanvasRenderingContext2D} graphic
      */
-    public draw() {
-      var graphic;
-      graphic = this.graphic;
+    public draw(graphic:CanvasRenderingContext2D) {
+
       graphic.save();
       graphic.beginPath();
-      graphic.translate(this.x, this.y);
+      graphic.translate(~~this.x, ~~this.y);
       graphic.rotate(this.rotation);
       graphic.fillStyle = "#FFFFFF";
       graphic.moveTo(10, 0);

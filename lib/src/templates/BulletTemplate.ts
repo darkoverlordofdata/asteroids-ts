@@ -25,7 +25,7 @@ module asteroids.templates {
       var y = sin * gun.offsetFromParent.x + cos * gun.offsetFromParent.y + parentPosition.position.y;
 
       entity.addComponent(Bullet, gun.bulletLifetime);
-      entity.addComponent(Display, new BulletView(EntitySystem.blackBoard.getEntry('2d')));
+      entity.addComponent(Display, new BulletView(<CanvasRenderingContext2D>EntitySystem.blackBoard.getEntry('2d')));
       entity.addComponent(Position, x, y, 0);
       entity.addComponent(Motion, cos * 150, sin * 150, 0, 0);
       entity.addComponent(Collision, 0);

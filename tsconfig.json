@@ -13,8 +13,8 @@
     },
 
     "files": [
-      "lib/src/ash.d.ts",
       "lib/src/artemis.d.ts",
+      "lib/src/pixi.d.ts",
       "lib/src/core/Constants.ts",
       "lib/src/ui/KeyPoll.ts",
       "lib/src/ui/Point.ts",

@@ -16,7 +16,7 @@ module asteroids.templates {
 
     public buildEntity(entity:artemis.Entity, world:artemis.World, state:GameState):artemis.Entity {
 
-      var waitView = new WaitForStartView(EntitySystem.blackBoard.getEntry('2d'));
+      var waitView = new WaitForStartView(<CanvasRenderingContext2D>EntitySystem.blackBoard.getEntry('2d'));
       entity.addComponent(state);
       entity.addComponent(WaitForStart, waitView, false);
       entity.addComponent(Display, waitView);

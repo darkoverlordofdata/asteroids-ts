@@ -4,9 +4,37 @@
   "description": "Artemis Asteroids TS",
   "main": "index.js",
   "config": {
-    "build": []
+    "build": [
+      "cp -f web/index_build.html build/web/index.html"
+    ]
+  },
+  "repository" : {
+    "type" : "git",
+    "url": "https://github.com/darkoverlordofdata/asteroids-ts.git"
   },
   "scripts": {
+    "_vscode_build": "tsc",
+    "android": "",
+    "build": "cp -f web/index_build.html build/web/index.html && cat web/src/stats.js/stats.min.js LF web/src/artemists/artemis.js LF web/src/asteroids/core/Constants.js LF web/src/asteroids/ui/KeyPoll.js LF web/src/asteroids/ui/Point.js LF web/src/asteroids/graphics/AsteroidDeathView.js LF web/src/asteroids/graphics/AsteroidView.js LF web/src/asteroids/graphics/BulletView.js LF web/src/asteroids/graphics/HudView.js LF web/src/asteroids/graphics/SpaceshipDeathView.js LF web/src/asteroids/graphics/SpaceshipView.js LF web/src/asteroids/graphics/WaitForStartView.js LF web/src/asteroids/components/Animation.js LF web/src/asteroids/components/Asteroid.js LF web/src/asteroids/components/Audio.js LF web/src/asteroids/components/Bullet.js LF web/src/asteroids/components/Collision.js LF web/src/asteroids/components/DeathThroes.js LF web/src/asteroids/components/Display.js LF web/src/asteroids/components/GameState.js LF web/src/asteroids/components/Gun.js LF web/src/asteroids/components/GunControls.js LF web/src/asteroids/components/Hud.js LF web/src/asteroids/components/Motion.js LF web/src/asteroids/components/MotionControls.js LF web/src/asteroids/components/Position.js LF web/src/asteroids/components/Spaceship.js LF web/src/asteroids/components/WaitForStart.js LF web/src/asteroids/templates/AsteroidDeathTemplate.js LF web/src/asteroids/templates/AsteroidTemplate.js LF web/src/asteroids/templates/BulletTemplate.js LF web/src/asteroids/templates/GameTemplate.js LF web/src/asteroids/templates/SpaceshipDeathTemplate.js LF web/src/asteroids/templates/SpaceshipTemplate.js LF web/src/asteroids/templates/WaitTemplate.js LF web/src/asteroids/systems/AnimationSystem.js LF web/src/asteroids/systems/AudioSystem.js LF web/src/asteroids/systems/BulletAgeSystem.js LF web/src/asteroids/systems/CollisionSystem.js LF web/src/asteroids/systems/DeathThroesSystem.js LF web/src/asteroids/systems/GameManager.js LF web/src/asteroids/systems/GunControlSystem.js LF web/src/asteroids/systems/HudSystem.js LF web/src/asteroids/systems/MotionControlSystem.js LF web/src/asteroids/systems/MovementSystem.js LF web/src/asteroids/systems/RenderSystem.js LF web/src/asteroids/systems/SystemPriorities.js LF web/src/asteroids/systems/WaitForStartSystem.js LF web/src/asteroids/core/GameConfig.js LF web/src/asteroids/core/Asteroids.js LF web/src/asteroids/core/Main.js LF web/main.js > build/asteroids.js  && cat web/src/stats.js/stats.min.js LF web/src/artemists/artemis.js LF web/src/asteroids/core/Constants.js LF web/src/asteroids/ui/KeyPoll.js LF web/src/asteroids/ui/Point.js LF web/src/asteroids/graphics/AsteroidDeathView.js LF web/src/asteroids/graphics/AsteroidView.js LF web/src/asteroids/graphics/BulletView.js LF web/src/asteroids/graphics/HudView.js LF web/src/asteroids/graphics/SpaceshipDeathView.js LF web/src/asteroids/graphics/SpaceshipView.js LF web/src/asteroids/graphics/WaitForStartView.js LF web/src/asteroids/components/Animation.js LF web/src/asteroids/components/Asteroid.js LF web/src/asteroids/components/Audio.js LF web/src/asteroids/components/Bullet.js LF web/src/asteroids/components/Collision.js LF web/src/asteroids/components/DeathThroes.js LF web/src/asteroids/components/Display.js LF web/src/asteroids/components/GameState.js LF web/src/asteroids/components/Gun.js LF web/src/asteroids/components/GunControls.js LF web/src/asteroids/components/Hud.js LF web/src/asteroids/components/Motion.js LF web/src/asteroids/components/MotionControls.js LF web/src/asteroids/components/Position.js LF web/src/asteroids/components/Spaceship.js LF web/src/asteroids/components/WaitForStart.js LF web/src/asteroids/templates/AsteroidDeathTemplate.js LF web/src/asteroids/templates/AsteroidTemplate.js LF web/src/asteroids/templates/BulletTemplate.js LF web/src/asteroids/templates/GameTemplate.js LF web/src/asteroids/templates/SpaceshipDeathTemplate.js LF web/src/asteroids/templates/SpaceshipTemplate.js LF web/src/asteroids/templates/WaitTemplate.js LF web/src/asteroids/systems/AnimationSystem.js LF web/src/asteroids/systems/AudioSystem.js LF web/src/asteroids/systems/BulletAgeSystem.js LF web/src/asteroids/systems/CollisionSystem.js LF web/src/asteroids/systems/DeathThroesSystem.js LF web/src/asteroids/systems/GameManager.js LF web/src/asteroids/systems/GunControlSystem.js LF web/src/asteroids/systems/HudSystem.js LF web/src/asteroids/systems/MotionControlSystem.js LF web/src/asteroids/systems/MovementSystem.js LF web/src/asteroids/systems/RenderSystem.js LF web/src/asteroids/systems/SystemPriorities.js LF web/src/asteroids/systems/WaitForStartSystem.js LF web/src/asteroids/core/GameConfig.js LF web/src/asteroids/core/Asteroids.js LF web/src/asteroids/core/Main.js LF web/main.js | java -jar packages/closure-compiler/lib/vendor/compiler.jar --compilation_level WHITESPACE_ONLY --js_output_file build/asteroids.min.js",
+    "clean": "rm -rf build/* && mkdir -p build && mkdir -p build/web && mkdir -p build/lib",
+    "closure": "npm run transpile && tools/convert && java -jar tools/plovr.jar build config.js",
+    "deploy": "cp -rf web/res ./web/frameworks/runtime-src/proj.android-studio/app/assets && cp -rf web/src ./web/frameworks/runtime-src/proj.android-studio/app/assets && cp -f web/main.js ./web/frameworks/runtime-src/proj.android-studio/app/assets && cp -f web/project.json ./web/frameworks/runtime-src/proj.android-studio/app/assets",
+    "depswriter": "python packages/google-closure-library/closure/bin/build/depswriter.py --root_with_prefix='packages/ash.coffee/goog/lib ../../../../packages/ash.coffee/goog/lib' --root_with_prefix='goog/asteroids ../../../../goog/asteroids' --root_with_prefix='web ../../../../web' > web/asteroids.dep.js",
+    "get": "bower-installer && cake get",
+    "publish": "gulp publish",
+    "jsdoc": "jsdoc goog/lib -r --template ../jaguarjs-jsdoc --configure ./conf.json --readme ./readme.md --destination ./build/web",
+    "manifest": "gulp manifest",
+    "postbuild": "cp -f build/asteroids.min.js build/web",
+    "postclosure": "cp -f web/asteroids.min.js build/web",
+    "postinstall": "bower install && npm run get",
+    "preandroid": "npm run predeploy && npm run transpile && npm run resources && cp -fr web/res ./web/frameworks/runtime-src/proj.android-studio/app/assets",
+    "prebuild": "npm run clean -s",
+    "predeploy": "rm -rf ./web/frameworks/runtime-src/proj.android-studio/app/assets/res && rm -rf ./web/frameworks/runtime-src/proj.android-studio/app/assets/src && rm -f ./web/frameworks/runtime-src/proj.android-studio/app/assets/main.js && rm -f ./web/frameworks/runtime-src/proj.android-studio/app/assets/project.json",
+    "resources": "",
+    "start": "tools/server web",
+    "serve": "tools/server build/web",
+    "test": "NODE_ENV=test mocha --compilers coffee:coffee-script --require test/test_helper.js --recursive",
+    "transpile": "tsc"
   },
   "author": "darkoverlordofdata@gmail.com",
   "license": "MIT",

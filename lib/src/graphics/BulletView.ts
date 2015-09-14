@@ -20,26 +20,27 @@ module asteroids.graphics {
     public rotation:number = 0;
 
     /** @type {CanvasRenderingContext2D}*/
-    public graphic = null;
+    public graphic:CanvasRenderingContext2D = null;
 
     /**
      * @constructor
      * @param {CanvasRenderingContext2D} graphic
      */
-    constructor(graphic) {
+    constructor(graphic:CanvasRenderingContext2D) {
       this.graphic = graphic;
     }
 
     /**
      * draw the view
+     * @param {CanvasRenderingContext2D} graphic
      */
-    public draw() {
-      var graphic = this.graphic;
+    public draw(graphic:CanvasRenderingContext2D) {
+
       graphic.save();
       graphic.beginPath();
       graphic.rotate(this.rotation);
       graphic.fillStyle = '#FFFFFF';
-      graphic.arc(this.x, this.y, 2, 0, Tau, false);
+      graphic.arc(~~this.x, ~~this.y, 2, 0, Tau, false);
       graphic.fill();
       graphic.restore();
     }

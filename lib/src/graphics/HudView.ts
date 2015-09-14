@@ -18,7 +18,7 @@ module asteroids.graphics {
     public rotation:number = 0;
 
     /** @type {CanvasRenderingContext2D}*/
-    public graphic = null;
+    public graphic:CanvasRenderingContext2D = null;
 
     /** @type {number}*/
     public score:number = 0;
@@ -44,10 +44,11 @@ module asteroids.graphics {
 
     /**
      * draw the view
+     * @param {CanvasRenderingContext2D} graphic
      */
-    public draw = () => {
-      this.drawScore();
-      this.drawLives();
+    public draw = (graphic) => {
+      this.drawScore(graphic);
+      this.drawLives(graphic);
     };
 
     /**
@@ -67,39 +68,39 @@ module asteroids.graphics {
     /**
      * draw the lives display
      */
-    public createLives() {
-      var l, s, x, y;
-      this.graphic.save();
-      this.graphic.beginPath();
-      this.graphic.font = "bold 18px Helvetica";
-      this.graphic.fillStyle = "#FFFFFF";  //FFFFFF'
-      this.graphic.textAlign = "center";
-      s = "LIVES: " + this.lives;
-      l = this.graphic.measureText(s);
-      x = l.width;
-      y = 20;
-      this.graphic.fillText(s, x, y);
-      this.graphic.fill();
-      this.graphic.restore();
+    public createLives(graphic) {
+
+      graphic.save();
+      graphic.beginPath();
+      graphic.font = "bold 18px Helvetica";
+      graphic.fillStyle = "#FFFFFF";  //FFFFFF'
+      graphic.textAlign = "center";
+      var s = "LIVES: " + this.lives;
+      var l = graphic.measureText(s);
+      var x = l.width;
+      var y = 20;
+      graphic.fillText(s, ~~x, ~~y);
+      graphic.fill();
+      graphic.restore();
     }
 
     /**
      * draw the score display
      */
-    public createScore() {
-      var l, s, x, y;
-      this.graphic.save();
-      this.graphic.beginPath();
-      this.graphic.font = "bold 18px Helvetica";
-      this.graphic.fillStyle = "#FFFFFF";  //FFFFFF'
-      this.graphic.textAlign = "center";
-      s = "SCORE: " + this.score;
-      l = this.graphic.measureText(s);
-      x = (window.window.innerWidth * window.devicePixelRatio) - l.width;
-      y = 20;
-      this.graphic.fillText(s, x, y);
-      this.graphic.fill();
-      this.graphic.restore();
+    public createScore(graphic:CanvasRenderingContext2D) {
+
+      graphic.save();
+      graphic.beginPath();
+      graphic.font = "bold 18px Helvetica";
+      graphic.fillStyle = "#FFFFFF";  //FFFFFF'
+      graphic.textAlign = "center";
+      var s = "SCORE: " + this.score;
+      var l = graphic.measureText(s);
+      var x = (window.window.innerWidth * window.devicePixelRatio) - l.width;
+      var y = 20;
+      graphic.fillText(s, ~~x, ~~y);
+      graphic.fill();
+      graphic.restore();
     }
   }
 }

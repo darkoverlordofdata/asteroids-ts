@@ -20,7 +20,7 @@ module asteroids.templates {
     public buildEntity(entity:artemis.Entity, world:artemis.World, radius:number, x:number, y:number):artemis.Entity {
 
       entity.addComponent(Asteroid);
-      entity.addComponent(Display, new AsteroidView(EntitySystem.blackBoard.getEntry('2d'), radius));
+      entity.addComponent(Display, new AsteroidView(<CanvasRenderingContext2D>EntitySystem.blackBoard.getEntry('2d'), radius));
       entity.addComponent(Position, x, y);
       entity.addComponent(Motion, (Math.random() - 0.5) * 4 * (50 - radius), (Math.random() - 0.5) * 4 * (50 - radius), Math.random() * 2 - 1, 0);
       entity.addComponent(Collision, radius);

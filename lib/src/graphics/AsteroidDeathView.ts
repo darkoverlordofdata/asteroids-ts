@@ -29,7 +29,7 @@ module asteroids.graphics {
     public rotation:number = 0;
 
     /** @type {CanvasRenderingContext2D}*/
-    public graphic = null;
+    public graphic:CanvasRenderingContext2D = null;
 
     /** @type {number}*/
     public radius:number = 0;
@@ -48,7 +48,7 @@ module asteroids.graphics {
      * @param {CanvasRenderingContext2D} graphic
      * @param {number} radius
      */
-    constructor(graphic, radius) {
+    constructor(graphic:CanvasRenderingContext2D, radius) {
       this.graphic = graphic;
       this.radius = radius;
       this.dots = [];
@@ -71,15 +71,18 @@ module asteroids.graphics {
         dot.x += dot.velocity.x * time;
         return dot.y += dot.velocity.y * time;
       });
-      return this.draw();
+      return this.draw(this.graphic);
     }
 
     /**
      * draw the view
+     * @param {CanvasRenderingContext2D} graphic
      */
 
-    public draw() {
-      return this.dots.map((dot) => dot.draw(this.x, this.y));
+    public draw(graphic:CanvasRenderingContext2D) {
+      this.dots.map((dot) => {
+        dot.draw(graphic, this.x, this.y);
+      });
     }
   }
 
@@ -112,28 +115,28 @@ module asteroids.graphics {
      * @param {number} maxDistance
      * @param {number} rotation
      */
-    constructor(graphic, maxDistance, rotation) {
-      var angle, distance, speed;
+    constructor(graphic:CanvasRenderingContext2D, maxDistance, rotation) {
+
       this.graphic = graphic;
       this.rotation = rotation;
-      angle = Math.random() * 2 * Math.PI;
-      distance = Math.random() * maxDistance;
+      var angle = Math.random() * Tau;
+      var distance = Math.random() * maxDistance;
       this.x = Math.cos(angle) * distance;
       this.y = Math.sin(angle) * distance;
-      speed = Math.random() * 10 + 10;
+      var speed = Math.random() * 10 + 10;
       this.velocity = new Point(Math.cos(angle) * speed, Math.sin(angle) * speed);
     }
 
     /**
+     * @param {CanvasRenderingContext2D} graphic
      * @param {number} x
      * @param {number} y
      */
-    public draw(x, y) {
-      var graphic;
-      graphic = this.graphic;
+    public draw(graphic:CanvasRenderingContext2D, x, y) {
+
       graphic.save();
       graphic.beginPath();
-      graphic.translate(x, y);
+      graphic.translate(~~x, ~~y);
       graphic.rotate(this.rotation);
       graphic.fillStyle = "#FFFFFF";
       graphic.arc(this.x, this.y, 2, 0, Tau, false);
